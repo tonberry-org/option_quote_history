@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket         = "tonberry-terraform-backend"
-    key            = "pricehistory.tfstate"
+    key            = "option_history_quotes.tfstate"
     region         = "us-west-2"
     dynamodb_table = "terraform-state-lock"
   }

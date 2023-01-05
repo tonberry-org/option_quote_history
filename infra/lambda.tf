@@ -1,9 +1,9 @@
-resource "aws_lambda_function" "pricehistory" {
-  function_name    = "pricehistory"
-  role             = aws_iam_role.pricehistory_lambda.arn
-  filename         = "../dist/pricehistory.zip"
-  source_code_hash = filebase64sha256("../dist/pricehistory.zip")
-  handler          = "pricehistory.lambda_function.lambda_handler"
+resource "aws_lambda_function" "option_history_quotes" {
+  function_name    = "option_history_quotes"
+  role             = aws_iam_role.option_history_quotes_lambda.arn
+  filename         = "../dist/option_history_quotes.zip"
+  source_code_hash = filebase64sha256("../dist/option_history_quotes.zip")
+  handler          = "option_history_quotes.lambda_function.lambda_handler"
   runtime          = "python3.9"
   publish          = true
   timeout          = 60

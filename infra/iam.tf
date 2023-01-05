@@ -22,8 +22,8 @@ data "aws_iam_policy" "s3" {
   arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
-resource "aws_iam_role" "pricehistory_lambda" {
-  name               = "pricehistory_lambda"
+resource "aws_iam_role" "option_history_quotes_lambda" {
+  name               = "option_history_quotesy_lambda"
   assume_role_policy = data.aws_iam_policy_document.lamda_exec_assume_role.json
 
   managed_policy_arns = [
