@@ -12,6 +12,8 @@ resource "aws_lambda_function" "option_history_quotes" {
     variables = {
       CODE : data.aws_ssm_parameter.code.value
       CLIENT_ID : data.aws_ssm_parameter.client_id.value
+      STRIKE_COUNT : 75
+      EXPIRATION_RANGE : 90
     }
   }
 }
