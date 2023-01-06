@@ -1,3 +1,4 @@
+from typing import Any
 from tdaclient.schema.option_chain_response import OptionChainOutput
 import boto3
 from datetime import datetime
@@ -23,6 +24,9 @@ class OptionQuoteIngestor:
         self._ddb_option_history_underlying_quotes.put_item(Item=item)
         return id
 
+    def __remove_none(self, item: dict[str, Any]) -> dict[str, Any]:
+        return {k: v for k, v in item.items() if v is not None}
+
     def ingest_options_quote(self, options: OptionChainOutput) -> None:
         underling_id = self.ingest_option_underlying(options)
         with self._ddb_option_history_quotes.batch_writer() as batch:
@@ -36,4 +40,5 @@ class OptionQuoteIngestor:
                     item_dict["strike"] = strike
                     item_dict["expiration"] = exp_dat
                     item_dict["underlying_id"] = underling_id
+                    item_dict = self.__remove_none(item_dict)
                     batch.put_item(Item=item_dict)
