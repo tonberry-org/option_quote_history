@@ -16,8 +16,10 @@ def lambda_handler(event: Mapping[str, Any], context: Mapping[str, Any]) -> str:
     symbol = event.get("symbol")
     logger.info(f"processing {symbol}")
 
-    expiration_range = event.get("expiration_range") or config.get_expiration_range()
-    strike_count = event.get("strike_count") or config.get_strike_count()
+    expiration_range = int(
+        event.get("expiration_range") or config.get_expiration_range()
+    )
+    strike_count = int(event.get("strike_count") or config.get_strike_count())
 
     tdsession = TDSession(
         "option_history_quotes",

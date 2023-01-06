@@ -27,9 +27,9 @@ def get_client_id() -> str:
     return get_or_throw("CLIENT_ID")
 
 
-def get_expiration_range() -> int:
-    return int(os.environ.get("EXPIRATION_RANGE") or 90)
+def get_expiration_range() -> str:
+    return os.environ.get("EXPIRATION_RANGE") or "90"
 
 
-def get_strike_count() -> int:
-    return int(os.environ.get("STRIKE_COUNT") or 75)
+def get_strike_count() -> str:
+    return os.environ.get("STRIKE_COUNT") or "75"
