@@ -16,6 +16,9 @@ def lambda_handler(event: Mapping[str, Any], context: Mapping[str, Any]) -> str:
     symbol = event.get("symbol")
     logger.info(f"processing {symbol}")
 
+    expiration_range = event.get("expiration_range") or config.get_expiration_range()
+    strike_count = event.get("strike_count") or config.get_strike_count()
+
     tdsession = TDSession(
         "option_history_quotes",
         code=config.get_code(),
@@ -25,8 +28,8 @@ def lambda_handler(event: Mapping[str, Any], context: Mapping[str, Any]) -> str:
     option_quote = tdsession.get_option_chain_by_date(
         symbol=symbol,
         fromDate=date.today(),
-        toDate=date.today() + timedelta(days=config.get_expiration_range()),
-        strikeCount=config.get_strike_count(),
+        toDate=date.today() + timedelta(days=expiration_range),
+        strikeCount=strike_count,
     ).output
     option_quote_ingestor = OptionQuoteIngestor()
     option_quote_ingestor.ingest_options_quote(option_quote)
