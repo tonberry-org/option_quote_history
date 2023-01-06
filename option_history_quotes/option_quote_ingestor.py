@@ -40,5 +40,4 @@ class OptionQuoteIngestor:
                     item_dict["strike"] = strike
                     item_dict["expiration"] = exp_dat
                     item_dict["underlying_id"] = underling_id
-                    item_dict = self.__remove_none(item_dict)
                     batch.put_item(Item=item_dict)

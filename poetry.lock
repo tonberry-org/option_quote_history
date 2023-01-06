@@ -742,7 +742,7 @@ requests = "^2.28.1"
 type = "git"
 url = "git@github.com:tonberry-org/tdaclient.git"
 reference = "main"
-resolved_reference = "b4ab7b47277f171ff485015b68ba3d70d943072d"
+resolved_reference = "13568148aa87e1957b88fad3849825cdd2a33a0a"
 
 [[package]]
 name = "tomli"
