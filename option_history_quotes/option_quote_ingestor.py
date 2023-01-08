@@ -18,9 +18,9 @@ class OptionQuoteIngestor:
         id = f"{underlying.symbol}:{underlying.quoteTime}"
         item = underlying.dict()
         item["id"] = id
-        item["timestamp"] = datetime.fromtimestamp(
-            underlying.quoteTime / 1000.0
-        ).isoformat()
+        timestamp = datetime.fromtimestamp(underlying.quoteTime / 1000.0)
+        item["timestamp"] = timestamp.isoformat()
+        item["date"] = timestamp.date().isoformat()
         self._ddb_option_history_underlying_quotes.put_item(Item=item)
         return id
 
@@ -34,9 +34,9 @@ class OptionQuoteIngestor:
                 for strike in options.callExpDateMap[exp_dat]:
                     item = options.callExpDateMap[exp_dat][strike][0]
                     item_dict = item.dict()
-                    timestamp = datetime.fromtimestamp(item.quoteTimeInLong / 1000.0)
-                    item_dict["timestamp"] = timestamp
-                    item_dict["date"] = timestamp.date().isoformat()
+                    item_dict["timestamp"] = datetime.fromtimestamp(
+                        item.quoteTimeInLong / 1000.0
+                    )
                     item_dict["strike"] = strike
                     item_dict["expiration"] = exp_dat
                     item_dict["underlying_id"] = underling_id
