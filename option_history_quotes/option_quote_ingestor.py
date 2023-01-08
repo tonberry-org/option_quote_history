@@ -34,9 +34,9 @@ class OptionQuoteIngestor:
                 for strike in options.callExpDateMap[exp_dat]:
                     item = options.callExpDateMap[exp_dat][strike][0]
                     item_dict = item.dict()
-                    item_dict["timestamp"] = datetime.fromtimestamp(
-                        item.quoteTimeInLong / 1000.0
-                    ).isoformat()
+                    timestamp = datetime.fromtimestamp(item.quoteTimeInLong / 1000.0)
+                    item_dict["timestamp"] = timestamp
+                    item_dict["date"] = timestamp.date().isoformat()
                     item_dict["strike"] = strike
                     item_dict["expiration"] = exp_dat
                     item_dict["underlying_id"] = underling_id
