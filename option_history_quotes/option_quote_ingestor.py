@@ -36,7 +36,7 @@ class OptionQuoteIngestor:
                     item_dict = item.dict()
                     item_dict["timestamp"] = datetime.fromtimestamp(
                         item.quoteTimeInLong / 1000.0
-                    )
+                    ).isoformat()
                     item_dict["strike"] = strike
                     item_dict["expiration"] = exp_dat
                     item_dict["underlying_id"] = underling_id
