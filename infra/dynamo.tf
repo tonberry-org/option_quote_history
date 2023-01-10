@@ -1,5 +1,5 @@
 
-resource "aws_dynamodb_table" "option_history_quotes" {
+resource "aws_dynamodb_table" "option_quote_history" {
   name         = "option_quote_history"
   hash_key     = "symbol"
   range_key    = "timestamp"

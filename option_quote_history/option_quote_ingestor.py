@@ -2,15 +2,16 @@ from typing import Any
 from tdaclient.schema.option_chain_response import OptionChainOutput
 import boto3
 from datetime import datetime
+import option_quote_history.config as config
 
 
 class OptionQuoteIngestor:
     def __init__(self) -> None:
         self._ddb_option_history_quotes = boto3.resource("dynamodb").Table(
-            "option_history_quotes"
+            config.get_ddb_option_table()
         )
         self._ddb_option_history_underlying_quotes = boto3.resource("dynamodb").Table(
-            "option_history_underlying_quotes"
+            config.get_ddb_underlying_table()
         )
 
     def ingest_option_underlying(self, options: OptionChainOutput) -> str:

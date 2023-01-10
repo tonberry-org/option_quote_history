@@ -33,3 +33,11 @@ def get_expiration_range() -> str:
 
 def get_strike_count() -> str:
     return os.environ.get("STRIKE_COUNT") or "75"
+
+
+def get_ddb_option_table() -> str:
+    return get_or_throw("DDB_QUOTE_TABLE")
+
+
+def get_ddb_underlying_table() -> str:
+    return get_or_throw("DDB_UNDERLYING_TABLE")

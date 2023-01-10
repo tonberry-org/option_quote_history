@@ -13,7 +13,9 @@ resource "aws_lambda_function" "option_quote_history" {
       CODE : data.aws_ssm_parameter.code.value
       CLIENT_ID : data.aws_ssm_parameter.client_id.value
       STRIKE_COUNT : 75
-      EXPIRATION_RANGE : 90
+      EXPIRATION_RANGE : 90,
+      DDB_QUOTE_TABLE : aws_dynamodb_table.option_quote_history.name,
+      DDB_UNDERLYING_TABLE : aws_dynamodb_table.option_history_underlying_quotes.name
     }
   }
 }
