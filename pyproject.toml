@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "option_history_quotes"
+name = "option_quote_history"
 version = "0.1.0"
 description = ""
 authors = ["Matthew Tondreau <mmtondreau@gmail.com>"]

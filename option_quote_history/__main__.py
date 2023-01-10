@@ -1,5 +1,5 @@
-from option_history_quotes.option_quote_ingestor import OptionQuoteIngestor
-import option_history_quotes.config as config
+from option_quote_history.option_quote_ingestor import OptionQuoteIngestor
+import option_quote_history.config as config
 from tda_tonberry_trader.tdsession import TDSession
 from datetime import date, timedelta, datetime
 

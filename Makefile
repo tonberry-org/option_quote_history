@@ -7,7 +7,7 @@ help:
 	@echo "package - generates zip file"
 	@echo "gen - generates response models"
 
-ZIP_FILE = option_history_quotes.zip
+ZIP_FILE = option_quote_history.zip
 WHEEL_FILE = realpath ./dist/*.whl
 
 .PHONY: clean
