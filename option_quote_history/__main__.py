@@ -1,7 +1,7 @@
 from option_quote_history.option_quote_ingestor import OptionQuoteIngestor
 import option_quote_history.config as config
 from tda_tonberry_trader.tdsession import TDSession
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta
 
 
 def main(argv: list[str]) -> None:

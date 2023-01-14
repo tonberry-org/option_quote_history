@@ -19,3 +19,13 @@ resource "aws_lambda_function" "option_quote_history" {
     }
   }
 }
+data "aws_lambda_function" "new_relic" {
+  function_name = "newrelic-log-ingestion"
+}
+resource "aws_cloudwatch_log_subscription_filter" "option_quote_history" {
+  name            = "logdna-logfilter"
+  log_group_name  = aws_cloudwatch_log_group.option_quote_history.name
+  filter_pattern  = ""
+  destination_arn = data.aws_lambda_function.new_relic.arn
+}
+
