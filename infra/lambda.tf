@@ -25,6 +25,7 @@ resource "aws_lambda_function" "option_quote_history" {
       DDB_UNDERLYING_TABLE : aws_dynamodb_table.option_history_underlying_quotes.name
     }
   }
+  layers = ["arn:aws:lambda:us-west-2:451483290750:layer:NewRelicPython39:36"]
 }
 data "aws_lambda_function" "new_relic" {
   function_name = "newrelic-log-ingestion"

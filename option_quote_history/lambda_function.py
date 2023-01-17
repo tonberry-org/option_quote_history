@@ -3,7 +3,7 @@ from option_quote_history.option_quote_ingestor import OptionQuoteIngestor
 import option_quote_history.config as config
 from tda_tonberry_trader.tdsession import TDSession
 from datetime import date, timedelta
-
+from newrelic import agent
 import logging
 
 logging.basicConfig(
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def lambda_handler(event: Mapping[str, Any], context: Mapping[str, Any]) -> str:
     symbol = event.get("symbol")
     logger.info(f"processing {symbol}")
-
+    agent.add_custom_parameter("symbol", symbol)
     expiration_range = int(
         event.get("expiration_range") or config.get_expiration_range()
     )

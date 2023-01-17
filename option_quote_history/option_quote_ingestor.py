@@ -3,6 +3,7 @@ from tdaclient.schema.option_chain_response import OptionChainOutput
 import boto3
 from datetime import datetime
 import option_quote_history.config as config
+import newrelic
 
 
 class OptionQuoteIngestor:
@@ -14,6 +15,7 @@ class OptionQuoteIngestor:
             config.get_ddb_underlying_table()
         )
 
+    @newrelic.agent.function_trace()
     def ingest_option_underlying(self, options: OptionChainOutput) -> str:
         underlying = options.underlying
         id = f"{underlying.symbol}:{underlying.quoteTime}"
@@ -28,6 +30,7 @@ class OptionQuoteIngestor:
     def __remove_none(self, item: dict[str, Any]) -> dict[str, Any]:
         return {k: v for k, v in item.items() if v is not None}
 
+    @newrelic.agent.function_trace()
     def ingest_options_quote(self, options: OptionChainOutput) -> None:
         underling_id = self.ingest_option_underlying(options)
         with self._ddb_option_history_quotes.batch_writer() as batch:
